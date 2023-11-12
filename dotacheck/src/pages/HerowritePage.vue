@@ -2,22 +2,29 @@
   <section class="write">
     <button @click="modalOpen = !modalOpen">{{ modalOpen ? 'Close' : 'Open'}}</button>
     <modal-write-hero
-     v-if="modalOpen"
-     @sendData="claimData"
+        v-if="modalOpen"
+        @sendData="claimData"
     >
     </modal-write-hero>
   </section>
   <section class="herocounters">
-
+    <ul>
+      <li
+          v-for="hero in heroCuntr"
+          :key="hero"
+      >
+        {{ hero }}
+      </li>
+    </ul>
   </section>
 </template>
 
 <script>
 import ModalWriteHero from "@/components/Modal.vue";
-import getHero from "../../api/getHero";
+import { getHeroCunterPicks } from "../../api/getHero";
 
 export default {
-  components: {ModalWriteHero},
+  components: { ModalWriteHero },
   data() {
     return {
       modalOpen: false,
@@ -25,24 +32,29 @@ export default {
       heroCuntr: []
     }
   },
+  watch: {
+    heroGet: function () {
+      this.sendRequest();
+    }
+  },
   methods: {
     claimData(hero) {
-      this.modalOpen = false
-      this.heroGet = hero.toLowerCase().replace(/ /g, '-')
+      this.modalOpen = false;
+      this.heroGet = hero.toLowerCase().replace(/ /g, '-');
     },
     sendRequest() {
-      getHero.getHeroCunterPicks(this.heroGet)
+      getHeroCunterPicks(this.heroGet)
           .then(heroCounterPicks => {
-            this.heroCuntr = heroCounterPicks
+            this.heroCuntr = heroCounterPicks;
+            console.log(heroCounterPicks);
           })
           .catch(error => {
-            console.error('Failed fetch: ', error)
-          })
+            console.error('Failed fetch: ', error);
+          });
     }
   }
 }
 </script>
 
 <style>
-
 </style>
