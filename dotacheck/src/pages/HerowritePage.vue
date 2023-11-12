@@ -46,7 +46,6 @@ export default {
       getHeroCunterPicks(this.heroGet)
           .then(heroCounterPicks => {
             this.heroCuntr = heroCounterPicks;
-            console.log(heroCounterPicks);
           })
           .catch(error => {
             console.error('Failed fetch: ', error);
