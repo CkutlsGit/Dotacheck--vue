@@ -1,16 +1,14 @@
 const { defineConfig } = require('@vue/cli-service');
 
 module.exports = defineConfig({
-  transpileDependencies: true,
   devServer: {
     proxy: {
       '/api': {
-        target: 'https://ru.dotabuff.com',
+        target: 'http://localhost:3000',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '',
         },
-        secure: false, // Добавьте эту опцию
       },
     },
   },
