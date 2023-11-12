@@ -1,7 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-export default function(instance) {
+export default function() {
     return {
         getHeroCunterPicks(hero) {
             return new Promise((resolve, reject) => {
